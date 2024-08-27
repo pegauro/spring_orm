@@ -13,7 +13,9 @@ public class Serie {
     private Long id;
 
     @Column(unique = true)
+
     private String titulo;
+    private String duracao;
     private Integer totalTemporadas;
     private Double avaliacao;
     @Enumerated(EnumType.STRING)
@@ -24,6 +26,7 @@ public class Serie {
 
     public Serie(DadosSerie dadosSerie){
         this.titulo = dadosSerie.titulo();
+        this.duracao =dadosSerie.duracao();
         this.totalTemporadas = dadosSerie.totalTemporadas();
         this.avaliacao = OptionalDouble.of(Double.valueOf(dadosSerie.avaliacao())).orElse(0);
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
@@ -34,6 +37,14 @@ public class Serie {
 
     public Long getId() {
         return id;
+    }
+
+    public String getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(String duracao) {
+        this.duracao = duracao;
     }
 
     public void setId(Long id) {
@@ -99,11 +110,11 @@ public class Serie {
     @Override
     public String toString() {
         return
-                "genero=" + genero +
+                        "genero=" + genero +
+                         "duracao"+ duracao+
                         ", titulo='" + titulo + '\'' +
                         ", totalTemporadas=" + totalTemporadas +
                         ", avaliacao=" + avaliacao +
-
                         ", atores='" + atores + '\'' +
                         ", poster='" + poster + '\'' +
                         ", sinopse='" + sinopse + '\'';
